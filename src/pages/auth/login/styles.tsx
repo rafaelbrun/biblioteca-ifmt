@@ -8,44 +8,28 @@ export default StyleSheet.create({
     },
     body: {
         height: "70%",
+        width: "100%",
         alignItems: 'center',
         padding: 4,
     },
-    card: {
-        width: "90%",
-        height: 150,
-        backgroundColor: gray,
-        marginVertical: 12,
-        borderRadius: 5,
-        padding: 12
+    inputContainer: {
+        paddingTop: 24,
+        width: "80%",
+        paddingHorizontal: 12,
+        marginHorizontal: 24
     },
-    valorTotal: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: lightBlue
+    fieldInput: {
+        marginBottom: 12
     },
-    valorParcelado: {
+    textInput: {
+        borderRadius: 2,
+        backgroundColor: skyBlue,
         fontSize: 20,
-        color: lightBlue
-    },
-    tipoPlano: {
-        marginStart: 12,
-        fontSize: 20,
-        color: lightBlue,
-        fontWeight: 'bold'
-    },
-    descricaoPlano: {
-        marginStart: 12,
-        fontSize: 14,
-        color: lightBlue
+        padding: 8
     },
     footer: {
         height: 100,
         justifyContent: 'center',
         marginHorizontal: 24
-    },
-    textoConta: {
-        marginTop: 12,
-        textDecorationLine: 'underline',
     }
 });
