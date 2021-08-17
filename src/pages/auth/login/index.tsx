@@ -2,12 +2,14 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import AppStatusBar from '../../../components/AppStatusBar';
 
 export default function Login() {
 	const navigation = useNavigation();
 
 	return (
 		<View style={styles.container}>
+			<AppStatusBar></AppStatusBar>
 			<ScrollView>
 				<View style={styles.body}>
 					<View style={styles.card}>
