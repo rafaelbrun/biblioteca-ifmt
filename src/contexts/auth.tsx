@@ -8,7 +8,7 @@ import * as auth from '../services/auth';
 interface AuthContextData {
     login: boolean;
     user: IUserAccount;
-    signIn(email: string, password: string): Promise<unknown>;
+    signIn(matricula: string, senha: string): Promise<unknown>;
     signOut(): void;
     loading: boolean;
     updateUser(user: IUserAccount): Promise<boolean>;
@@ -38,9 +38,9 @@ export const AuthProvider: React.FC = ({ children }) => {
         loadData();
     }, [])
 
-    async function signIn(email: string, password: string) {
+    async function signIn(matricula: string, senha: string) {
         setLoading(true);
-        if (email == "teste@proboi.com" && password == "proboiteste") {
+        if (matricula == "123123" && senha == "adm123") {
             const userTeste: IUserAccount = {
                 nome: "Conta Teste",
                 matricula: "123123",
@@ -52,7 +52,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             setLogin(true);
         } else {
             try {
-                const response = await auth.signIn(email, password);
+                const response = await auth.signIn(matricula, senha);
                 const { data } = response;
                 if (data.login) {
                     api.defaults.headers['Authorization'] = `Bearer ${data.token}`;
