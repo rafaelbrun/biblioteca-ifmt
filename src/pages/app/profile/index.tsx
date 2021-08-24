@@ -4,7 +4,7 @@ import styles from './styles';
 import AppStatusBar from '../../../components/AppStatusBar';
 import { useAuth } from '../../../contexts/auth';
 
-export default function Main() {
+export default function Profile() {
 	
 	const { signOut } = useAuth();
 
@@ -15,7 +15,7 @@ export default function Main() {
 	return (
 		<View style={styles.container}>
 			<AppStatusBar></AppStatusBar>
-			<Text>Main</Text>
+			<Text>Profile</Text>
 			<Button title="deslogar" onPress={handleDeslogar}></Button>
 		</View>
 	);
