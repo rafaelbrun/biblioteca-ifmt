@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
 import styles from './styles';
 import AppStatusBar from '../../../components/AppStatusBar';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
@@ -9,9 +9,10 @@ import { darkBlue, skyBlue } from '../../geral/styles';
 
 export default function Main() {
 
-	const [titulo, setTitulo] = useState('');
 	const [exemplarSelect, setExemplarSelect] = useState({} as IExemplar);
+	const [isLoading, setIsLoading] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
+	const [exemplaresFiltered, setExemplaresFiltered] = useState([{}] as IExemplar[]);
 
 	const exemplares: IExemplar[] = [
 		{
@@ -24,7 +25,7 @@ export default function Main() {
 		},
 		{
 			id: 2,
-			disponivel: true,
+			disponivel: false,
 			autor: 'Robert C. Martin',
 			edicao: '1ª',
 			editora: 'Alta Books',
@@ -40,7 +41,7 @@ export default function Main() {
 		},
 		{
 			id: 4,
-			disponivel: true,
+			disponivel: false,
 			autor: 'Maurice Leblanc',
 			edicao: '1ª',
 			editora: 'Pandorga Editora',
@@ -64,7 +65,7 @@ export default function Main() {
 		},
 		{
 			id: 7,
-			disponivel: true,
+			disponivel: false,
 			autor: 'Carol H. Collins',
 			edicao: '1ª',
 			editora: 'Editora da Unicamp',
@@ -125,6 +126,24 @@ export default function Main() {
 		setModalVisible(!modalVisible);
 	}
 
+	function handlePesquisar(text: string) {
+		setIsLoading(true);
+		setTimeout(() => {
+			setExemplaresFiltered(filterExemplares(text));
+			setIsLoading(false);
+		}, 300);
+	}
+
+	function filterExemplares(text: string) {
+		return exemplares.filter(exemplar => {
+			return exemplar.autor.includes(text) || exemplar.titulo.includes(text)
+		});
+	}
+
+	useEffect(() => {
+		setExemplaresFiltered(exemplares);
+	}, []);
+
 	return (
 		<View style={styles.container}>
 			<AppStatusBar></AppStatusBar>
@@ -159,13 +178,13 @@ export default function Main() {
 						</View>
 						<View style={styles.buttonsContainer}>
 							{!exemplarSelect.disponivel ?
-								<Pressable style={[styles.button, styles.buttonDarkBlue]} onPress={() => setModalVisible(!modalVisible)}>
-									<Text style={styles.textStyle}>Alerta</Text>
-								</Pressable>
+								<TouchableOpacity style={[styles.button, styles.buttonDarkBlue]} onPress={() => setModalVisible(!modalVisible)}>
+									<Text style={styles.textStyle}>Criar Alerta</Text>
+								</TouchableOpacity>
 								:
-								<Pressable style={[styles.button, styles.buttonSkyBlue]} onPress={() => setModalVisible(!modalVisible)}>
+								<TouchableOpacity style={[styles.button, styles.buttonSkyBlue]} onPress={() => setModalVisible(!modalVisible)}>
 									<Text style={styles.textStyle}>Reservar</Text>
-								</Pressable>
+								</TouchableOpacity>
 							}
 						</View>
 					</View>
@@ -174,22 +193,36 @@ export default function Main() {
 			<View style={styles.inputContainer}>
 				<View style={styles.inputField}>
 					<AntDesign style={styles.inputText} name="search1" size={24} color="black" />
-					<TextInput style={[styles.inputText, styles.fullWidth]} onChangeText={text => { setTitulo(text) }}
+					<TextInput style={[styles.inputText, styles.fullWidth]} onChangeText={text => { handlePesquisar(text) }}
 						placeholder="Pesquisar livro"></TextInput>
 					<AntDesign style={styles.inputText} name="arrowright" size={24} color={skyBlue} />
 				</View>
 			</View>
 			<View style={styles.listContainer}>
-				<ScrollView showsVerticalScrollIndicator={false}>
-					{exemplares.map((item: IExemplar, key: number) => {
-						return (
-							<TouchableOpacity key={key} onPress={() => handlePressExemplar(key)} style={styles.itemContainer}>
-								<Text style={styles.exemplarTitulo}>{item.titulo}</Text>
-								<Text>{item.autor}</Text>
-							</TouchableOpacity>
-						);
-					})}
-				</ScrollView>
+				{!isLoading ?
+					<ScrollView showsVerticalScrollIndicator={false}>
+						{exemplaresFiltered.map((item: IExemplar, key: number) => {
+							if (item.disponivel) {
+								return (
+									<TouchableOpacity key={key} onPress={() => handlePressExemplar(key)} style={styles.itemContainer}>
+										<Text style={styles.exemplarTitulo}>{item.titulo}</Text>
+										<Text>{item.autor}</Text>
+									</TouchableOpacity>
+								);
+							} else {
+								return (
+									<TouchableOpacity key={key} onPress={() => handlePressExemplar(key)} style={styles.itemContainer}>
+										<Text style={[styles.exemplarTitulo, styles.disabledText]}>{item.titulo}</Text>
+										<Text style={styles.disabledText}>{item.autor}</Text>
+									</TouchableOpacity>
+								);
+							}
+						})}
+					</ScrollView>
+					:
+					<View style={styles.loaderContainer}>
+						<ActivityIndicator></ActivityIndicator>
+					</View>}
 			</View>
 		</View>
 	);

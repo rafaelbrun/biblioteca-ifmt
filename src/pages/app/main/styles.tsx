@@ -116,5 +116,11 @@ export default StyleSheet.create({
         fontSize: 20,
         marginLeft: 4,
         fontWeight: '600'
+    },
+    disabledText: {
+        color: '#ccc'
+    },
+    loaderContainer: {
+        marginTop: 24
     }
 });
