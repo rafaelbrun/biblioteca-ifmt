@@ -24,7 +24,7 @@ const AppRoutes: React.FC = () => (
             }
 
             return <AntDesign name={iconName} size={24} color="black" />;
-        },
+        },  
         headerShown: false,
         tabBarLabelStyle: { marginBottom: 6, fontSize: 14 },
         tabBarStyle: { height: 60 },
