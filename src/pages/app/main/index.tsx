@@ -5,7 +5,7 @@ import AppStatusBar from '../../../components/AppStatusBar';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { IExemplar } from '../../../interfaces/IExemplar';
-import { darkBlue, skyBlue } from '../../geral/styles';
+import { darkBlue, lightBlue, skyBlue } from '../../geral/styles';
 
 export default function Main() {
 
@@ -135,8 +135,9 @@ export default function Main() {
 	}
 
 	function filterExemplares(text: string) {
+		const textLower = text.toLowerCase();
 		return exemplares.filter(exemplar => {
-			return exemplar.autor.includes(text) || exemplar.titulo.includes(text)
+			return exemplar.autor.toLowerCase().includes(textLower) || exemplar.titulo.toLowerCase().includes(textLower)
 		});
 	}
 

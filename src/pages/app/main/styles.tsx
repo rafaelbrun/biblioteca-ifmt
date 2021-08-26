@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { blue, lightBlue, gray, darkBlue, skyBlue } from '../../geral/styles'
+import { lightBlue, gray, darkBlue, skyBlue } from '../../geral/styles'
 
 export default StyleSheet.create({
     container: {
@@ -118,7 +118,7 @@ export default StyleSheet.create({
         fontWeight: '600'
     },
     disabledText: {
-        color: '#ccc'
+        color: '#bbb'
     },
     loaderContainer: {
         marginTop: 24
