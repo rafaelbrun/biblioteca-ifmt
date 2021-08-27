@@ -28,6 +28,10 @@ export default StyleSheet.create({
         marginLeft: 12,
         fontSize: 16
     },
+    redText: {
+        color: 'red',
+        fontWeight: '300'
+    },
     divisor: {
         width: '95%',
         alignSelf: 'center',
