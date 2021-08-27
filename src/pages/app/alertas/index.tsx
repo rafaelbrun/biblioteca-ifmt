@@ -8,7 +8,7 @@ import styles from './styles';
 
 export default function Alertas() {
 
-	const navigation = useNavigation();
+    const navigation = useNavigation();
 
     function navigateBack() {
         navigation.goBack();
@@ -17,13 +17,11 @@ export default function Alertas() {
     return (
         <View style={styles.container}>
             <AppStatusBar></AppStatusBar>
-            <View>
-                <AppHeader onPress={navigateBack} title='Alertas'></AppHeader>
-                <View style={styles.body}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        
-                    </ScrollView>
-                </View>
+            <AppHeader onPress={navigateBack} title='Alertas'></AppHeader>
+            <View style={styles.body}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+
+                </ScrollView>
             </View>
         </View>
     );

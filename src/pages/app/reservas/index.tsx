@@ -170,7 +170,7 @@ export default function Reservas() {
         },
     ]
 
-	const navigation = useNavigation();
+    const navigation = useNavigation();
 
     function navigateBack() {
         navigation.goBack();
@@ -179,23 +179,21 @@ export default function Reservas() {
     return (
         <View style={styles.container}>
             <AppStatusBar></AppStatusBar>
-            <View>
-                <AppHeader onPress={navigateBack} title='Reservas'></AppHeader>
-                <View style={styles.body}>
-                    <ScrollView showsVerticalScrollIndicator={false}>
-                        {reservas.map((reserva, index) => {
-                            return (
-                                <View>
-                                    <View style={styles.itemContainer}>
-                                        <Text style={styles.itemText}>{reserva.exemplar.titulo}</Text>
-                                        <Text style={styles.itemDateText}>Entrega até {reserva.validade}</Text>
-                                    </View>
-                                    {index + 1 != reservas.length ? <View style={styles.divisor}></View> : <View></View>}
+            <AppHeader onPress={navigateBack} title='Reservas'></AppHeader>
+            <View style={styles.body}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    {reservas.map((reserva, index) => {
+                        return (
+                            <View>
+                                <View style={styles.itemContainer}>
+                                    <Text style={styles.itemText}>{reserva.exemplar.titulo}</Text>
+                                    <Text style={styles.itemDateText}>Entrega até {reserva.validade}</Text>
                                 </View>
-                            );
-                        })}
-                    </ScrollView>
-                </View>
+                                {index + 1 != reservas.length ? <View style={styles.divisor}></View> : <View></View>}
+                            </View>
+                        );
+                    })}
+                </ScrollView>
             </View>
         </View>
     );
