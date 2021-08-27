@@ -184,7 +184,7 @@ export default function Reservas() {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {reservas.map((reserva, index) => {
                         return (
-                            <View>
+                            <View key={index}>
                                 <View style={styles.itemContainer}>
                                     <Text style={styles.itemText}>{reserva.exemplar.titulo}</Text>
                                     <Text style={styles.itemDateText}>Entrega até {reserva.validade}</Text>

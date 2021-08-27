@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { lightBlue, gray } from '../../geral/styles'
+import { lightBlue } from '../../geral/styles'
 
 export default StyleSheet.create({
     container: {
@@ -8,20 +8,51 @@ export default StyleSheet.create({
     },
     body: {
         backgroundColor: 'white',
-        height: '90%'
+        height: '43%',
+        marginBottom: 12
+    },
+    titleContainer: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#aaa',
+        padding: 10,
+    },
+    titleText: {
+        fontSize: 18,
+        letterSpacing: 1.5
     },
     itemContainer: {
         display: 'flex',
+        flexDirection: 'row',
+        padding: 8,
+        paddingHorizontal: 12,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    exemplarContainer: {
+        display: 'flex',
         flexDirection: 'column',
-        padding: 16
+        width: '90%'
     },
-    itemText: {
-        letterSpacing: 1.5,
-        fontSize: 16
+    titleExemplar: {
+        fontSize: 16,
+        flexWrap: 'wrap',
+        letterSpacing: 0.5
     },
-    itemDateText: {
-        marginLeft: 12,
-        color: gray
+    autorExemplar: {
+        fontSize: 12,
+        color: '#aaa',
+        letterSpacing: 1
+    },
+    removeButtonContainer: { 
+        padding: 4
+    },
+    titleNotificao: {
+        letterSpacing: .5
+    },
+    dataNotificao: {
+        fontSize: 12,
+        color: '#aaa',
+        letterSpacing: 1
     },
     divisor: {
         width: '95%',
