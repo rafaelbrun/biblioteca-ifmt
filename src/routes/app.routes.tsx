@@ -5,8 +5,8 @@ import { AntDesign } from '@expo/vector-icons';
 import Profile from '../pages/app/profile';
 import { createStackNavigator } from '@react-navigation/stack';
 import Reservas from '../pages/app/reservas';
-import Alertas from '../pages/app/alertas';
 import Configuracoes from '../pages/app/configuracoes';
+import Interesses from '../pages/app/interesses';
 
 const ProfileStack = createStackNavigator();
 
@@ -14,7 +14,7 @@ function ProfileStackScreen() {
   return (
     <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
       <ProfileStack.Screen name="Home" component={Profile} />
-      <ProfileStack.Screen name="Alertas" component={Alertas} />
+      <ProfileStack.Screen name="Interesses" component={Interesses} />
       <ProfileStack.Screen name="Reservas" component={Reservas} />
       <ProfileStack.Screen name="Configuracoes" component={Configuracoes} />
     </ProfileStack.Navigator>

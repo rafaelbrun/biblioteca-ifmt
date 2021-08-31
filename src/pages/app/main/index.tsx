@@ -5,121 +5,16 @@ import AppStatusBar from '../../../components/AppStatusBar';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { IExemplar } from '../../../interfaces/IExemplar';
-import { darkBlue, lightBlue, skyBlue } from '../../geral/styles';
+import { darkBlue, skyBlue } from '../../geral/styles';
+import { getAllExemplares } from '../../../services/exemplares-service';
 
 export default function Main() {
 
 	const [exemplarSelect, setExemplarSelect] = useState({} as IExemplar);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [exemplaresFiltered, setExemplaresFiltered] = useState([{}] as IExemplar[]);
-
-	const exemplares: IExemplar[] = [
-		{
-			id: 1,
-			disponivel: true,
-			autor: 'Silvio Cesar Roxo Giavaroto',
-			edicao: '1ª',
-			editora: 'Ciência Moderna',
-			titulo: 'Kali Linux. Introdução ao Penetration Testing'
-		},
-		{
-			id: 2,
-			disponivel: false,
-			autor: 'Robert C. Martin',
-			edicao: '1ª',
-			editora: 'Alta Books',
-			titulo: 'Código limpo: Habilidades práticas do Agile Software'
-		},
-		{
-			id: 3,
-			disponivel: true,
-			autor: 'Celmo Celeno PORTO',
-			edicao: '8ª',
-			editora: 'Guanabara Koogan',
-			titulo: 'Semiologia Médica'
-		},
-		{
-			id: 4,
-			disponivel: false,
-			autor: 'Maurice Leblanc',
-			edicao: '1ª',
-			editora: 'Pandorga Editora',
-			titulo: 'Arsène Lupin: O Ladrão de Casaca'
-		},
-		{
-			id: 5,
-			disponivel: true,
-			autor: 'Rafael',
-			edicao: '31ª',
-			editora: 'Editora Saraiva',
-			titulo: 'Vade Mecum Saraiva Tradicional'
-		},
-		{
-			id: 6,
-			disponivel: true,
-			autor: 'Guaracy Moreira Filho',
-			edicao: '11ª',
-			editora: 'Rideel',
-			titulo: 'Código Penal Comentado'
-		},
-		{
-			id: 7,
-			disponivel: false,
-			autor: 'Carol H. Collins',
-			edicao: '1ª',
-			editora: 'Editora da Unicamp',
-			titulo: 'Fundamentos de Cromatografia'
-		},
-		{
-			id: 8,
-			disponivel: true,
-			autor: 'Angelo Machado',
-			edicao: '3ª',
-			editora: 'Editora Atheneu',
-			titulo: 'Neuroanatomia funcional'
-		},
-		{
-			id: 9,
-			disponivel: true,
-			autor: 'Ilana Zeitoune ',
-			edicao: '1ª',
-			editora: 'Editora Forense',
-			titulo: 'Petróleo e Gás no Brasil - Regulação da Exploração e da Produção'
-		},
-		{
-			id: 10,
-			disponivel: true,
-			autor: 'Orlando Gomes',
-			edicao: '22º',
-			editora: 'Editora Forense',
-			titulo: 'Introdução ao Direito Civil'
-		},
-		{
-			id: 11,
-			disponivel: true,
-			autor: 'Trevos Kletz',
-			edicao: '5ª',
-			editora: 'Interciência',
-			titulo: 'O que Houve de Errado?'
-		},
-		{
-			id: 1,
-			disponivel: true,
-			autor: 'José Hernandez Perez Júnior',
-			edicao: '11ª',
-			editora: 'Atlas',
-			titulo: 'Controladoria Estratégica: Textos E Casos Práticos Com Solução'
-		},
-		{
-			id: 13,
-			disponivel: true,
-			autor: 'Mathias Jr. Wilson',
-			edicao: '1ª',
-			editora: 'Editora Manole',
-			titulo: 'Mathias - ecocardiografia para o dia a dia'
-		},
-	]
+	const [exemplares, setExemplares] = useState([{}] as IExemplar[]);
 
 	function handlePressExemplar(index: number) {
 		setExemplarSelect(exemplares[index]);
@@ -142,8 +37,15 @@ export default function Main() {
 	}
 
 	useEffect(() => {
-		setExemplaresFiltered(exemplares);
-	}, []);
+		const fetchData = async () => {
+			const exemplaresss = (await getAllExemplares()).data.data;
+			setExemplares(exemplaresss);
+			setExemplaresFiltered(exemplares);
+			setIsLoading(false);
+		}
+		fetchData();
+
+	}, [isLoading]);
 
 	return (
 		<View style={styles.container}>
@@ -180,7 +82,7 @@ export default function Main() {
 						<View style={styles.buttonsContainer}>
 							{!exemplarSelect.disponivel ?
 								<TouchableOpacity style={[styles.button, styles.buttonDarkBlue]} onPress={() => setModalVisible(!modalVisible)}>
-									<Text style={styles.textStyle}>Criar Alerta</Text>
+									<Text style={styles.textStyle}>Criar Interesse</Text>
 								</TouchableOpacity>
 								:
 								<TouchableOpacity style={[styles.button, styles.buttonSkyBlue]} onPress={() => setModalVisible(!modalVisible)}>

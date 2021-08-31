@@ -6,9 +6,9 @@ import AppHeader from '../../../components/AppHeader';
 import AppStatusBar from "../../../components/AppStatusBar";
 import styles from './styles';
 import { Feather } from '@expo/vector-icons';
-import { INotificaoExemplar } from '../../../interfaces/INotificacaoAlerta';
+import { INotificaoExemplar } from '../../../interfaces/INotificacaoInteresse';
 
-export default function Alertas() {
+export default function Interesses() {
 
     const [exemplares, setExemplares] = useState(
         [
@@ -158,10 +158,10 @@ export default function Alertas() {
         navigation.goBack();
     }
 
-    function handleRemoveAlerta(index: number, title: string) {
+    function handleRemoveInteresse(index: number, title: string) {
         Alert.alert(
             'Remover',
-            `Deseja retirar o alerta do livro ${title}?`,
+            `Deseja retirar o interesse do livro ${title}?`,
             [
                 {
                     text: 'Cancelar',
@@ -169,7 +169,7 @@ export default function Alertas() {
                 },
                 {
                     text: 'Sim', onPress: () => {
-                        removeAlerta(index);
+                        removeInteresse(index);
                     },
                     style: 'cancel'
                 }
@@ -178,28 +178,28 @@ export default function Alertas() {
         );
     }
 
-    function removeAlerta(indexAlerta: number) {
-        setExemplares(exemplares.filter((_, index) => index != indexAlerta));
+    function removeInteresse(indexInteresse: number) {
+        setExemplares(exemplares.filter((_, index) => index != indexInteresse));
     }
 
     return (
         <View style={styles.container}>
             <AppStatusBar></AppStatusBar>
-            <AppHeader onPress={navigateBack} title='Alertas'></AppHeader>
+            <AppHeader onPress={navigateBack} title='Interesses'></AppHeader>
             <View style={styles.body}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>Exemplares em alerta</Text>
+                    <Text style={styles.titleText}>Exemplares com Interesse</Text>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {exemplares.map((exemplar, index) => {
                         return (
-                            <View>
-                                <View style={styles.itemContainer} key={index}>
+                            <View key={index}>
+                                <View style={styles.itemContainer} >
                                     <View style={styles.exemplarContainer}>
                                         <Text style={styles.titleExemplar}>{exemplar.titulo}</Text>
                                         <Text style={styles.autorExemplar}>{exemplar.autor}</Text>
                                     </View>
-                                    <TouchableOpacity onPress={() => { handleRemoveAlerta(index, exemplar.titulo) }}
+                                    <TouchableOpacity onPress={() => { handleRemoveInteresse(index, exemplar.titulo) }}
                                         style={styles.removeButtonContainer}>
                                         <Feather name="x" size={24} color="red" />
                                     </TouchableOpacity>
@@ -212,13 +212,13 @@ export default function Alertas() {
             </View>
             <View style={styles.body}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>Notificações de alerta</Text>
+                    <Text style={styles.titleText}>Notificações de Interesse</Text>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {notificacoes.map((notificao, index) => {
                         return (
-                            <View>
-                                <View style={styles.itemContainer} key={index}>
+                            <View key={index}>
+                                <View style={styles.itemContainer} >
                                     <View style={styles.exemplarContainer}>
                                         <Text style={styles.titleNotificao}>O livro {notificao.titulo} ficou disponível!</Text>
                                         <Text style={styles.dataNotificao}>{notificao.dataNotificacao}</Text>

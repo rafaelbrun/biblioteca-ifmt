@@ -50,10 +50,10 @@ export default function Profile() {
 						</View>
 					</TouchableOpacity>
 					<View style={styles.divisor}></View>
-					<TouchableOpacity onPress={() => { navigateTo('Alertas') }}>
+					<TouchableOpacity onPress={() => { navigateTo('Interesses') }}>
 						<View style={styles.itemContainer}>
 							<SimpleLineIcons name="exclamation" size={18} color="black" />
-							<Text style={styles.itemText}>Alertas</Text>
+							<Text style={styles.itemText}>Interesses</Text>
 						</View>
 					</TouchableOpacity>
 					<View style={styles.divisor}></View>

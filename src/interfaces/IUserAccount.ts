@@ -4,6 +4,6 @@ export interface IUserAccount {
     id?: number;
     nome: string;
     matricula: string;
-    alertas?: number[];
+    interesse?: number[];
     reservas?: IReserva[];
 }
