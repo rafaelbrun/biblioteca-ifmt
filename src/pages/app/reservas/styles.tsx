@@ -23,6 +23,10 @@ export default StyleSheet.create({
         marginLeft: 12,
         color: gray
     },
+    semReservasText: {
+        marginTop: 24,
+        marginLeft: 24
+    },
     divisor: {
         width: '95%',
         alignSelf: 'center',

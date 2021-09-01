@@ -1,7 +1,7 @@
 import { IReserva } from "./IReserva";
 
 export interface IUserAccount {
-    id?: number;
+    id: number;
     nome: string;
     matricula: string;
     interesse?: number[];

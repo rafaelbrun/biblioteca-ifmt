@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, Pressable, ActivityIndicator, Alert } from 'react-native';
 import styles from './styles';
 import AppStatusBar from '../../../components/AppStatusBar';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { IExemplar } from '../../../interfaces/IExemplar';
 import { darkBlue, skyBlue } from '../../geral/styles';
-import { getAllExemplares } from '../../../services/exemplares-service';
+import { getAllExemplares, realizarReserva } from '../../../services/exemplares-service';
+import { useAuth } from '../../../contexts/auth';
 
 export default function Main() {
+	const { user } = useAuth();
 
+	const [exemplares, setExemplares] = useState([{}] as IExemplar[]);
+	const [exemplaresFiltered, setExemplaresFiltered] = useState([{}] as IExemplar[]);
 	const [exemplarSelect, setExemplarSelect] = useState({} as IExemplar);
+
 	const [isLoading, setIsLoading] = useState(true);
 	const [modalVisible, setModalVisible] = useState(false);
-	const [exemplaresFiltered, setExemplaresFiltered] = useState([{}] as IExemplar[]);
-	const [exemplares, setExemplares] = useState([{}] as IExemplar[]);
 
 	function handlePressExemplar(index: number) {
 		setExemplarSelect(exemplares[index]);
@@ -29,6 +32,30 @@ export default function Main() {
 		}, 300);
 	}
 
+	async function handleReservar() {
+		const resp = (await realizarReserva(user.id, exemplarSelect.id)).data;
+		var message = 'Reserva realizada com sucesso';
+
+		console.log(resp);
+
+		if (!resp.success) {
+			message = resp.error;
+		}
+
+		Alert.alert(
+			'Reserva',
+			message,
+			[
+				{
+					text: 'Ok', onPress: () => {
+						setModalVisible(!modalVisible);
+					}
+				}
+			],
+			{ cancelable: false }
+		);
+	}
+
 	function filterExemplares(text: string) {
 		const textLower = text.toLowerCase();
 		return exemplares.filter(exemplar => {
@@ -37,6 +64,8 @@ export default function Main() {
 	}
 
 	useEffect(() => {
+		console.log(user);
+
 		const fetchData = async () => {
 			const exemplaresss = (await getAllExemplares()).data.data;
 			setExemplares(exemplaresss);
@@ -85,7 +114,7 @@ export default function Main() {
 									<Text style={styles.textStyle}>Criar Interesse</Text>
 								</TouchableOpacity>
 								:
-								<TouchableOpacity style={[styles.button, styles.buttonSkyBlue]} onPress={() => setModalVisible(!modalVisible)}>
+								<TouchableOpacity style={[styles.button, styles.buttonSkyBlue]} onPress={handleReservar}>
 									<Text style={styles.textStyle}>Reservar</Text>
 								</TouchableOpacity>
 							}
