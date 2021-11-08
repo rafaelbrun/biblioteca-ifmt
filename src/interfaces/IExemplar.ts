@@ -4,5 +4,6 @@ export interface IExemplar {
     autor: string;
     edicao: string;
     editora: string;
+    estoque: number;
     disponivel: boolean;
 }
