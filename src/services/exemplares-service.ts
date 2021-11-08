@@ -1,8 +1,9 @@
 import api from "../services/api";
 import { AxiosResponse } from "axios";
-import { ResponseApi } from "../interfaces/IResponseApi";
+import { ResponseApi, ResponseBack } from "../interfaces/IResponseApi";
+import { IExemplar } from "../interfaces/IExemplar";
 
-export function getAllExemplares(): Promise<AxiosResponse> {
+export function getAllExemplares(): Promise<AxiosResponse<ResponseBack<IExemplar[]>>> {
     return Promise.resolve(api.get('exemplares', { timeout: 8000 }));
 }
 
