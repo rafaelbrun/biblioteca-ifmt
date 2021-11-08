@@ -64,8 +64,6 @@ export default function Main() {
 	}
 
 	useEffect(() => {
-		console.log(user);
-
 		const fetchData = async () => {
 			const exemplaresss = (await getAllExemplares()).data.data;
 			setExemplares(exemplaresss);
@@ -106,6 +104,10 @@ export default function Main() {
 							<View style={styles.textContainer}>
 								<Text style={styles.modalTextTitle}>Editora </Text>
 								<Text style={styles.modalText}>{exemplarSelect.editora}</Text>
+							</View>
+							<View style={styles.textContainer}>
+								<Text style={styles.modalTextTitle}>Estoque </Text>
+								<Text style={styles.modalText}>{exemplarSelect.estoque} unidades</Text>
 							</View>
 						</View>
 						<View style={styles.buttonsContainer}>

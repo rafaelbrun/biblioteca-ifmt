@@ -75,7 +75,7 @@ export default StyleSheet.create({
     button: {
         borderRadius: 20,
         padding: 10,
-        width: 100,
+        width: 130,
         elevation: 2
     },
     buttonSkyBlue: {

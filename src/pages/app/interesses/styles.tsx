@@ -20,6 +20,10 @@ export default StyleSheet.create({
         fontSize: 18,
         letterSpacing: 1.5
     },
+    semInteressesText: {
+        marginTop: 24,
+        marginLeft: 24
+    },
     itemContainer: {
         display: 'flex',
         flexDirection: 'row',

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import styles from './styles';
 import AppStatusBar from '../../../components/AppStatusBar';
 import { useAuth } from '../../../contexts/auth';
-import { AntDesign, Ionicons, SimpleLineIcons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Profile() {
@@ -40,7 +40,8 @@ export default function Profile() {
 			<AppStatusBar></AppStatusBar>
 			<View>
 				<View style={styles.header}>
-					<Text style={styles.userNome}>{user.nome} - {user.matricula}</Text>
+					<Text style={styles.userNome}>{user.nome}</Text>
+					<Text style={styles.userMatricula}>{user.matricula}</Text>
 				</View>
 				<View style={styles.body}>
 					<TouchableOpacity onPress={() => { navigateTo('Reservas') }}>
@@ -52,7 +53,7 @@ export default function Profile() {
 					<View style={styles.divisor}></View>
 					<TouchableOpacity onPress={() => { navigateTo('Interesses') }}>
 						<View style={styles.itemContainer}>
-							<SimpleLineIcons name="exclamation" size={18} color="black" />
+							<AntDesign name="infocirlceo" size={20} color="black" />
 							<Text style={styles.itemText}>Interesses</Text>
 						</View>
 					</TouchableOpacity>

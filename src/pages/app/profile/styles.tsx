@@ -7,11 +7,18 @@ export default StyleSheet.create({
         backgroundColor: lightBlue,
     },
     header: {
-        padding: 24
+        padding: 20,
+        alignItems: 'flex-end'
     },
     userNome: {
         color: gray,
         fontSize: 18,
+        letterSpacing: 1
+    },
+    userMatricula: {
+        marginLeft: 4,
+        color: '#888',
+        fontSize: 14,
         letterSpacing: 1
     },
     body: {
