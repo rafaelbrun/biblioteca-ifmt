@@ -7,3 +7,9 @@ export interface ResponseApi {
         user: IUserAccount,
     }
 }
+
+export interface ResponseBack<T> {
+    data: T;
+    success: boolean;
+    error?: string;
+}
