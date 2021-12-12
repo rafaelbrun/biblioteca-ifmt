@@ -88,7 +88,7 @@ export default function Interesses() {
                             <View key={index}>
                                 <View style={styles.itemContainer} >
                                     <View style={styles.exemplarContainer}>
-                                        <Text style={styles.titleNotificao}>O livro {notificao.titulo} ficou disponível!</Text>
+                                        <Text style={styles.titleNotificao}>O livro {notificao.exemplar.titulo} ficou disponível!</Text>
                                         <Text style={styles.dataNotificao}>{notificao.dataNotificacao}</Text>
                                     </View>
                                 </View>

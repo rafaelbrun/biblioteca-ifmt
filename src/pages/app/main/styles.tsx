@@ -12,21 +12,21 @@ export default StyleSheet.create({
     inputField: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        alignItems: 'center',
         borderRadius: 18,
         backgroundColor: '#fff'
     },
-    inputText: {
+    marginInput: {
         paddingVertical: 12,
         paddingHorizontal: 6
     },
     fullWidth: {
-        width: '80%'
+        width: '70%'
     },
     listContainer: {
-        backgroundColor: '#fff',
-        width: '85%',
+        marginHorizontal: 24,
         alignSelf: 'center',
+        backgroundColor: '#fff',
         height: '80%'
     },
     itemContainer: {
@@ -122,5 +122,14 @@ export default StyleSheet.create({
     },
     loaderContainer: {
         marginTop: 24
+    },
+    errorMessageContainer: {
+        display: 'flex',
+        margin: 32,
+        alignItems: 'center'
+    },
+    errorMessage: {
+        fontSize: 16,
+        letterSpacing: 1
     }
 });

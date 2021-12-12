@@ -1,5 +1,7 @@
+import { IExemplar } from "./IExemplar";
+
 export interface INotificaoExemplar {
     id: number;
-    titulo: string;
-    dataNotificacao: string;
+    exemplar: IExemplar;
+    dataNotificacao: Date;
 }
