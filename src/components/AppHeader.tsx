@@ -1,28 +1,41 @@
-import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { gray } from '../pages/geral/styles';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  GestureResponderEvent,
+} from 'react-native';
 
-const AppHeader = ({ onPress, title }: any) => (
+import { Ionicons } from '@expo/vector-icons';
+
+import { gray } from 'src/pages/geral/styles';
+
+export interface IPropsHeader {
+  onPress: (event: GestureResponderEvent) => void;
+  title: string;
+}
+
+const AppHeader: React.FC<IPropsHeader> = ({ onPress, title }) => (
   <View style={styles.header}>
-    <TouchableOpacity onPress={onPress} style={styles.backButtonContainer}>
-      <Ionicons name="arrow-back" size={20} color={gray} />
+    <TouchableOpacity style={styles.backButtonContainer} onPress={onPress}>
+      <Ionicons color={gray} name={'arrow-back'} size={20} />
     </TouchableOpacity>
     <Text style={styles.headerText}>{title}</Text>
   </View>
 );
 
 const styles = StyleSheet.create({
+  backButtonContainer: {
+    alignItems: 'center',
+    height: 50,
+    justifyContent: 'center',
+    width: 50,
+  },
   header: {
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-  },
-  backButtonContainer: {
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   headerText: {
     color: gray,

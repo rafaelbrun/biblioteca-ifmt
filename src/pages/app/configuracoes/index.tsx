@@ -1,21 +1,26 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import styles from './styles';
-import AppStatusBar from '../../../components/AppStatusBar';
-import AppHeader from '../../../components/AppHeader';
+import { View } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
 
-export default function Configuracoes() {
+import AppHeader from 'src/components/AppHeader';
+import AppStatusBar from 'src/components/AppStatusBar';
+
+import styles from './styles';
+
+const Configuracoes: React.FC = () => {
   const navigation = useNavigation();
 
-  function navigateBack() {
+  const navigateBack = (): void => {
     navigation.goBack();
-  }
+  };
 
   return (
     <View style={styles.container}>
-      <AppStatusBar></AppStatusBar>
-      <AppHeader onPress={navigateBack} title="Configurações"></AppHeader>
+      <AppStatusBar />
+      <AppHeader title={'Configurações'} onPress={navigateBack} />
     </View>
   );
-}
+};
+
+export default Configuracoes;

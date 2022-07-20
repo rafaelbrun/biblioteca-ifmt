@@ -7,31 +7,6 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['import'],
   rules: {
-    'import/order': [
-      'error',
-      {
-        alphabetize: {
-          caseInsensitive: true,
-          order: 'asc',
-        },
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          ['index', 'sibling', 'parent', 'object'],
-        ],
-        'newlines-between': 'always',
-        pathGroups: [
-          {
-            group: 'external',
-            pattern: 'react+(|-native)',
-            position: 'before',
-          },
-        ],
-        pathGroupsExcludedImportTypes: ['react'],
-      },
-    ],
-    'no-shadow': 'off',
     '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
     '@typescript-eslint/naming-convention': [
       'error',
@@ -71,6 +46,31 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-var-requires': ['off'],
+    'import/order': [
+      'error',
+      {
+        alphabetize: {
+          caseInsensitive: true,
+          order: 'asc',
+        },
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['index', 'sibling', 'parent', 'object'],
+        ],
+        'newlines-between': 'always',
+        pathGroups: [
+          {
+            group: 'external',
+            pattern: 'react+(|-native)',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['react'],
+      },
+    ],
+    'no-shadow': 'off',
   },
   settings: {
     'import/extensions': ['.ts', '.tsx', '.js', '.jsx'],

@@ -1,9 +1,9 @@
 export interface IExemplar {
-  id: number;
-  titulo: string;
   autor: string;
+  disponivel: boolean;
   edicao: string;
   editora: string;
   estoque: number;
-  disponivel: boolean;
+  id: number;
+  titulo: string;
 }

@@ -1,17 +1,26 @@
 import React from 'react';
-import { StyleSheet, View, Platform, StatusBar } from 'react-native';
-import { gray } from '../pages/geral/styles';
+import {
+  StyleSheet,
+  View,
+  Platform,
+  StatusBar,
+  ColorValue,
+} from 'react-native';
 
-const AppStatusBar = ({ backgroundColor }: any) => (
-  <View
-    style={[styles.statusBarBackground, backgroundColor && { backgroundColor }]}
-  ></View>
+import { gray } from 'src/pages/geral/styles';
+
+interface IPropsStatusBar {
+  backgroundColor?: ColorValue;
+}
+
+const AppStatusBar: React.FC<IPropsStatusBar> = ({ backgroundColor }) => (
+  <View style={[styles.statusBarBackground, { backgroundColor }]} />
 );
 
 const styles = StyleSheet.create({
   statusBarBackground: {
-    height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
     backgroundColor: Platform.OS === 'ios' ? gray : 'white',
+    height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
   },
 });
 

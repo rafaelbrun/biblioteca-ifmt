@@ -1,47 +1,59 @@
-import React from 'react';
-import Main from '../pages/app/main';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { useCallback } from 'react';
+
 import { AntDesign } from '@expo/vector-icons';
-import Profile from '../pages/app/profile';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Reservas from '../pages/app/reservas';
-import Configuracoes from '../pages/app/configuracoes';
-import Interesses from '../pages/app/interesses';
+
+import Configuracoes from 'src/pages/app/configuracoes';
+import Interesses from 'src/pages/app/interesses';
+import Main from 'src/pages/app/main';
+import Profile from 'src/pages/app/profile';
+import Reservas from 'src/pages/app/reservas';
 
 const ProfileStack = createStackNavigator();
 
-function ProfileStackScreen() {
+const ProfileStackScreen: React.ComponentType = () => {
   return (
     <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
-      <ProfileStack.Screen name="Home" component={Profile} />
-      <ProfileStack.Screen name="Interesses" component={Interesses} />
-      <ProfileStack.Screen name="Reservas" component={Reservas} />
-      <ProfileStack.Screen name="Configuracoes" component={Configuracoes} />
+      <ProfileStack.Screen component={Profile} name={'Home'} />
+      <ProfileStack.Screen component={Interesses} name={'Interesses'} />
+      <ProfileStack.Screen component={Reservas} name={'Reservas'} />
+      <ProfileStack.Screen component={Configuracoes} name={'Configuracoes'} />
     </ProfileStack.Navigator>
   );
-}
+};
 
 const Tab = createBottomTabNavigator();
 
-const AppRoutes: React.FC = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ color, size }) => {
-        let iconName: any = 'home';
-        if (route.name == 'Perfil') {
-          iconName = 'profile';
-        }
+const AppRoutes: React.FC = () => {
+  const generateTabBarIcon = useCallback(
+    (route: RouteProp<ParamListBase, string>, color: string): JSX.Element => {
+      let iconName: 'home' | 'profile' = 'home';
+      if (route.name === 'Perfil') {
+        iconName = 'profile';
+      }
 
-        return <AntDesign name={iconName} size={24} color={color} />;
-      },
-      headerShown: false,
-      tabBarLabelStyle: { marginBottom: 6, fontSize: 14 },
-      tabBarStyle: { height: 60 },
-    })}
-  >
-    <Tab.Screen name="Inicio" component={Main} />
-    <Tab.Screen name="Perfil" component={ProfileStackScreen} />
-  </Tab.Navigator>
-);
+      return <AntDesign color={color} name={iconName} size={24} />;
+    },
+    [],
+  );
+
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ color }) => {
+          return generateTabBarIcon(route, color);
+        },
+        tabBarLabelStyle: { fontSize: 14, marginBottom: 6 },
+        tabBarStyle: { height: 60 },
+      })}
+    >
+      <Tab.Screen component={Main} name={'Inicio'} />
+      <Tab.Screen component={ProfileStackScreen} name={'Perfil'} />
+    </Tab.Navigator>
+  );
+};
 
 export default AppRoutes;

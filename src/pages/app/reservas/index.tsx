@@ -1,37 +1,42 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
-import AppHeader from '../../../components/AppHeader';
-import AppStatusBar from '../../../components/AppStatusBar';
-import { useAuth } from '../../../contexts/auth';
-import { IReserva } from '../../../interfaces/IReserva';
-import { getAllReservas } from '../../../services/exemplares-service';
+
+import AppHeader from 'src/components/AppHeader';
+import AppStatusBar from 'src/components/AppStatusBar';
+import { useAuth } from 'src/contexts/auth';
+import { IReserva } from 'src/interfaces/IReserva';
+import { getAllReservas } from 'src/services/exemplares-service';
+
 import styles from './styles';
 
-export default function Reservas() {
+const Reservas: React.FC = () => {
   const [reservas, setReservas] = useState([] as IReserva[]);
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
 
-  function navigateBack() {
+  const navigateBack = (): void => {
     navigation.goBack();
-  }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       const reservass = (await getAllReservas(user.id)).data.data;
-      if (reservass.length > 0) setReservas(reservass);
+      if (reservass.length > 0) {
+        setReservas(reservass);
+      }
       setIsLoading(false);
     };
     fetchData();
-  }, [isLoading]);
+  }, [isLoading, user.id]);
 
   return (
     <View style={styles.container}>
-      <AppStatusBar></AppStatusBar>
-      <AppHeader onPress={navigateBack} title="Reservas"></AppHeader>
+      <AppStatusBar />
+      <AppHeader title={'Reservas'} onPress={navigateBack} />
       {reservas.length > 0 ? (
         <View style={styles.body}>
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -43,13 +48,13 @@ export default function Reservas() {
                       {reserva.exemplar.titulo}
                     </Text>
                     <Text style={styles.itemDateText}>
-                      Entrega até {reserva.validade}
+                      {`Entrega até ${reserva.validade}`}
                     </Text>
                   </View>
-                  {index + 1 != reservas.length ? (
-                    <View style={styles.divisor}></View>
+                  {index + 1 !== reservas.length ? (
+                    <View style={styles.divisor} />
                   ) : (
-                    <View></View>
+                    <View />
                   )}
                 </View>
               );
@@ -59,10 +64,12 @@ export default function Reservas() {
       ) : (
         <View style={styles.body}>
           <Text style={[styles.semReservasText, styles.itemText]}>
-            Você ainda não possui reservas
+            {'Você ainda não possui reservas'}
           </Text>
         </View>
       )}
     </View>
   );
-}
+};
+
+export default Reservas;

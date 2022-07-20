@@ -1,6 +1,6 @@
 import { IUserAccount } from './IUserAccount';
 
-export interface ResponseApi {
+export interface IResponseApi {
   data: {
     login: boolean;
     token: string;
@@ -8,8 +8,8 @@ export interface ResponseApi {
   };
 }
 
-export interface ResponseBack<T> {
+export interface IResponseBack<T> {
   data: T;
-  success: boolean;
   error?: string;
+  success: boolean;
 }

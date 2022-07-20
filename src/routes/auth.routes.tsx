@@ -1,12 +1,14 @@
 import React from 'react';
-import Login from '../pages/auth/login';
+
 import { createStackNavigator } from '@react-navigation/stack';
+
+import Login from 'src/pages/auth/login';
 
 const AuthStack = createStackNavigator();
 
 const AuthRoutes: React.FC = () => (
   <AuthStack.Navigator screenOptions={{ headerShown: false }}>
-    <AuthStack.Screen name="Login" component={Login} />
+    <AuthStack.Screen component={Login} name={'Login'} />
   </AuthStack.Navigator>
 );
 

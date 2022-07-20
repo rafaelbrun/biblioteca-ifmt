@@ -8,7 +8,6 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     '@react-native-community',
-    'plugin:react-native-a11y/all',
     'plugin:jest/recommended',
   ],
   globals: {
@@ -80,8 +79,6 @@ module.exports = {
       },
     ],
     'react-hooks/exhaustive-deps': 'error',
-    'react-native-a11y/has-accessibility-hint': ['off'],
-    'react-native-a11y/has-valid-accessibility-ignores-invert-colors': ['warn'],
     'react/jsx-boolean-value': ['error', 'always'],
     'react/jsx-curly-brace-presence': [
       'error',

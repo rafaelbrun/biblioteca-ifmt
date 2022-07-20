@@ -1,7 +1,9 @@
 import React from 'react';
-import AuthRoutes from './auth.routes';
+
+import { useAuth } from 'src/contexts/auth';
+
 import AppRoutes from './app.routes';
-import { useAuth } from '../contexts/auth';
+import AuthRoutes from './auth.routes';
 
 const Routes: React.FC = () => {
   const { login } = useAuth();

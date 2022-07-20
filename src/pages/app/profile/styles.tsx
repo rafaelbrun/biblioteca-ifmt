@@ -1,49 +1,50 @@
 import { StyleSheet } from 'react-native';
-import { lightBlue, gray } from '../../geral/styles';
+
+import { lightBlue, gray } from 'src/pages/geral/styles';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: lightBlue,
-  },
-  header: {
-    padding: 20,
-    alignItems: 'flex-end',
-  },
-  userNome: {
-    color: gray,
-    fontSize: 18,
-    letterSpacing: 1,
-  },
-  userMatricula: {
-    marginLeft: 4,
-    color: '#888',
-    fontSize: 14,
-    letterSpacing: 1,
-  },
   body: {
     backgroundColor: 'white',
   },
+  container: {
+    backgroundColor: lightBlue,
+    flex: 1,
+  },
+  divisor: {
+    alignSelf: 'center',
+    borderBottomWidth: 1,
+    borderColor: '#efefef',
+    height: 1,
+    width: '95%',
+  },
+  header: {
+    alignItems: 'flex-end',
+    padding: 20,
+  },
   itemContainer: {
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
     padding: 16,
-    alignItems: 'center',
   },
   itemText: {
+    fontSize: 16,
     letterSpacing: 1.5,
     marginLeft: 12,
-    fontSize: 16,
   },
   redText: {
     color: 'red',
     fontWeight: '300',
   },
-  divisor: {
-    width: '95%',
-    alignSelf: 'center',
-    height: 1,
-    borderBottomWidth: 1,
-    borderColor: '#efefef',
+  userMatricula: {
+    color: '#888',
+    fontSize: 14,
+    letterSpacing: 1,
+    marginLeft: 4,
+  },
+  userNome: {
+    color: gray,
+    fontSize: 18,
+    letterSpacing: 1,
   },
 });

@@ -1,24 +1,26 @@
-import api from '../services/api';
 import { AxiosResponse } from 'axios';
-import { ResponseApi, ResponseBack } from '../interfaces/IResponseApi';
-import { IExemplar } from '../interfaces/IExemplar';
 
-export function getAllExemplares(): Promise<
-  AxiosResponse<ResponseBack<IExemplar[]>>
-> {
+import { IExemplar } from 'src/interfaces/IExemplar';
+import { IResponseApi, IResponseBack } from 'src/interfaces/IResponseApi';
+
+import api from './api';
+
+export const getAllExemplares = (): Promise<
+  AxiosResponse<IResponseBack<IExemplar[]>>
+> => {
   return Promise.resolve(api.get('exemplares', { timeout: 8000 }));
-}
+};
 
-export function getAllReservas(idDiscente: number): Promise<AxiosResponse> {
+export const getAllReservas = (idDiscente: number): Promise<AxiosResponse> => {
   return Promise.resolve(
     api.get(`discentes/reservas/${idDiscente}`, { timeout: 8000 }),
   );
-}
+};
 
-export function realizarReserva(
+export const realizarReserva = (
   idDiscente: number,
   idExemplar: number,
-): Promise<AxiosResponse> {
+): Promise<AxiosResponse> => {
   return Promise.resolve(
     api.post(
       'discentes/reservar',
@@ -26,16 +28,16 @@ export function realizarReserva(
       { timeout: 8000 },
     ),
   );
-}
+};
 
-export function signInApp(
+export const signInApp = (
   matricula: string,
   senha: string,
-): Promise<ResponseApi> {
+): Promise<IResponseApi> => {
   return Promise.resolve(
     api.post('discentes/auth', { matricula, senha }, { timeout: 8000 }),
   );
-}
+};
 
 export function getAllInteresses(): Promise<AxiosResponse> {
   return Promise.resolve(api.get('exemplares', { timeout: 8000 }));

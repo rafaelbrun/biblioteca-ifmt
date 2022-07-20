@@ -1,43 +1,47 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import styles from './styles';
-import AppStatusBar from '../../../components/AppStatusBar';
-import { useAuth } from '../../../contexts/auth';
+
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Profile() {
+import AppStatusBar from 'src/components/AppStatusBar';
+import { useAuth } from 'src/contexts/auth';
+
+import styles from './styles';
+
+const Profile: React.FC = () => {
   const { signOut, user } = useAuth();
   const navigation = useNavigation();
 
-  function handleDeslogar() {
+  const handleDeslogar = (): void => {
     Alert.alert(
       'Sair',
       'Deseja deslogar?',
       [
         {
-          text: 'Cancelar',
           style: 'cancel',
+          text: 'Cancelar',
         },
         {
-          text: 'Sim',
           onPress: () => {
             signOut();
           },
           style: 'destructive',
+          text: 'Sim',
         },
       ],
       { cancelable: false },
     );
-  }
+  };
 
-  function navigateTo(route: any) {
-    navigation.navigate(route);
-  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const navigateTo = (key: any): void => {
+    navigation.navigate(key);
+  };
 
   return (
     <View style={styles.container}>
-      <AppStatusBar></AppStatusBar>
+      <AppStatusBar />
       <View>
         <View style={styles.header}>
           <Text style={styles.userNome}>{user.nome}</Text>
@@ -50,41 +54,43 @@ export default function Profile() {
             }}
           >
             <View style={styles.itemContainer}>
-              <AntDesign name="book" size={20} color="black" />
-              <Text style={styles.itemText}>Reservas</Text>
+              <AntDesign color={'black'} name={'book'} size={20} />
+              <Text style={styles.itemText}>{'Reservas'}</Text>
             </View>
           </TouchableOpacity>
-          <View style={styles.divisor}></View>
+          <View style={styles.divisor} />
           <TouchableOpacity
             onPress={() => {
               navigateTo('Interesses');
             }}
           >
             <View style={styles.itemContainer}>
-              <AntDesign name="infocirlceo" size={20} color="black" />
-              <Text style={styles.itemText}>Interesses</Text>
+              <AntDesign color={'black'} name={'infocirlceo'} size={20} />
+              <Text style={styles.itemText}>{'Interesses'}</Text>
             </View>
           </TouchableOpacity>
-          <View style={styles.divisor}></View>
+          <View style={styles.divisor} />
           <TouchableOpacity
             onPress={() => {
               navigateTo('Configuracoes');
             }}
           >
             <View style={styles.itemContainer}>
-              <Ionicons name="settings-outline" size={20} color="black" />
-              <Text style={styles.itemText}>Configurações</Text>
+              <Ionicons color={'black'} name={'settings-outline'} size={20} />
+              <Text style={styles.itemText}>{'Configurações'}</Text>
             </View>
           </TouchableOpacity>
-          <View style={styles.divisor}></View>
+          <View style={styles.divisor} />
           <TouchableOpacity onPress={handleDeslogar}>
             <View style={styles.itemContainer}>
-              <Ionicons name="ios-exit-outline" size={20} color="red" />
-              <Text style={[styles.itemText, styles.redText]}>Sair</Text>
+              <Ionicons color={'red'} name={'ios-exit-outline'} size={20} />
+              <Text style={[styles.itemText, styles.redText]}>{'Sair'}</Text>
             </View>
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-}
+};
+
+export default Profile;

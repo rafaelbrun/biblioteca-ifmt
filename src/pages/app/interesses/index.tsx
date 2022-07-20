@@ -1,57 +1,60 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import AppHeader from '../../../components/AppHeader';
-import AppStatusBar from '../../../components/AppStatusBar';
-import styles from './styles';
-import { Feather } from '@expo/vector-icons';
-import { INotificaoExemplar } from '../../../interfaces/INotificacaoInteresse';
-import { IExemplar } from '../../../interfaces/IExemplar';
 
-export default function Interesses() {
+import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+import AppHeader from 'src/components/AppHeader';
+import AppStatusBar from 'src/components/AppStatusBar';
+import { IExemplar } from 'src/interfaces/IExemplar';
+import { INotificaoExemplar } from 'src/interfaces/INotificacaoInteresse';
+
+import styles from './styles';
+
+const Interesses: React.FC = () => {
   const [exemplares, setExemplares] = useState([] as IExemplar[]);
 
-  var notificacoes: INotificaoExemplar[] = [];
+  const notificacoes: INotificaoExemplar[] = [];
 
   const navigation = useNavigation();
 
-  function navigateBack() {
+  const navigateBack = (): void => {
     navigation.goBack();
-  }
+  };
 
-  function handleRemoveInteresse(index: number, title: string) {
+  const handleRemoveInteresse = (index: number, title: string): void => {
     Alert.alert(
       'Remover',
       `Deseja retirar o interesse do livro ${title}?`,
       [
         {
-          text: 'Cancelar',
           style: 'destructive',
+          text: 'Cancelar',
         },
         {
-          text: 'Sim',
           onPress: () => {
             removeInteresse(index);
           },
           style: 'cancel',
+          text: 'Sim',
         },
       ],
       { cancelable: false },
     );
-  }
+  };
 
-  function removeInteresse(indexInteresse: number) {
-    setExemplares(exemplares.filter((_, index) => index != indexInteresse));
-  }
+  const removeInteresse = (indexInteresse: number): void => {
+    setExemplares(exemplares.filter((_, index) => index !== indexInteresse));
+  };
 
   return (
     <View style={styles.container}>
-      <AppStatusBar></AppStatusBar>
-      <AppHeader onPress={navigateBack} title="Interesses"></AppHeader>
+      <AppStatusBar />
+      <AppHeader title={'Interesses'} onPress={navigateBack} />
       <View style={styles.body}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Exemplares com Interesse</Text>
+          <Text style={styles.titleText}>{'Exemplares com Interesse'}</Text>
         </View>
         {exemplares.length > 0 ? (
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -66,18 +69,18 @@ export default function Interesses() {
                       <Text style={styles.autorExemplar}>{exemplar.autor}</Text>
                     </View>
                     <TouchableOpacity
+                      style={styles.removeButtonContainer}
                       onPress={() => {
                         handleRemoveInteresse(index, exemplar.titulo);
                       }}
-                      style={styles.removeButtonContainer}
                     >
-                      <Feather name="x" size={24} color="red" />
+                      <Feather color={'red'} name={'x'} size={24} />
                     </TouchableOpacity>
                   </View>
-                  {index + 1 != exemplares.length ? (
-                    <View style={styles.divisor}></View>
+                  {index + 1 !== exemplares.length ? (
+                    <View style={styles.divisor} />
                   ) : (
-                    <View></View>
+                    <View />
                   )}
                 </View>
               );
@@ -86,14 +89,14 @@ export default function Interesses() {
         ) : (
           <View style={styles.body}>
             <Text style={[styles.semInteressesText, styles.titleExemplar]}>
-              Você não possui interesses
+              {'Você não possui interesses'}
             </Text>
           </View>
         )}
       </View>
       <View style={styles.body}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Notificações de Interesse</Text>
+          <Text style={styles.titleText}>{'Notificações de Interesse'}</Text>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           {notificacoes.map((notificao, index) => {
@@ -102,17 +105,17 @@ export default function Interesses() {
                 <View style={styles.itemContainer}>
                   <View style={styles.exemplarContainer}>
                     <Text style={styles.titleNotificao}>
-                      O livro {notificao.exemplar.titulo} ficou disponível!
+                      {`O livro ${notificao.exemplar.titulo} ficou disponível!`}
                     </Text>
                     <Text style={styles.dataNotificao}>
                       {notificao.dataNotificacao}
                     </Text>
                   </View>
                 </View>
-                {index + 1 != notificacoes.length ? (
-                  <View style={styles.divisor}></View>
+                {index + 1 !== notificacoes.length ? (
+                  <View style={styles.divisor} />
                 ) : (
-                  <View></View>
+                  <View />
                 )}
               </View>
             );
@@ -121,4 +124,6 @@ export default function Interesses() {
       </View>
     </View>
   );
-}
+};
+
+export default Interesses;

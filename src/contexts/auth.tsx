@@ -1,18 +1,20 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import { IUserAccount } from '../interfaces/IUserAccount';
-import { signInApp } from '../services/exemplares-service';
 
-interface AuthContextData {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { IUserAccount } from 'src/interfaces/IUserAccount';
+import { signInApp } from 'src/services/exemplares-service';
+
+interface IAuthContextData {
+  loading: boolean;
   login: boolean;
-  user: IUserAccount;
   signIn(matricula: string, senha: string): Promise<unknown>;
   signOut(): void;
-  loading: boolean;
+  user: IUserAccount;
 }
 
-const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState({} as IUserAccount);
@@ -20,7 +22,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadData() {
+    const loadData = async (): Promise<void> => {
       const storagedUser = await AsyncStorage.getItem('@RNAuth:user');
 
       if (storagedUser) {
@@ -29,18 +31,18 @@ export const AuthProvider: React.FC = ({ children }) => {
         setLoading(false);
       }
       setLoading(false);
-    }
+    };
 
     loadData();
   }, []);
 
-  async function signIn(matricula: string, senha: string) {
+  const signIn = async (matricula: string, senha: string): Promise<void> => {
     setLoading(true);
-    if (matricula == '123123' && senha == 'adm123') {
+    if (matricula === '123123' && senha === 'adm123') {
       const userTeste: IUserAccount = {
         id: 1,
-        nome: 'Conta Teste',
         matricula: '123123',
+        nome: 'Conta Teste',
       };
       await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(userTeste));
 
@@ -69,21 +71,21 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
 
     setLoading(false);
-  }
+  };
 
-  async function signOut() {
+  const signOut = async (): Promise<void> => {
     await AsyncStorage.removeItem('@RNAuth:user');
     setUser({} as IUserAccount);
     setLogin(false);
-  }
+  };
 
   return (
-    <AuthContext.Provider value={{ login, user, signIn, signOut, loading }}>
+    <AuthContext.Provider value={{ loading, login, signIn, signOut, user }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export function useAuth() {
+export const useAuth = (): IAuthContextData => {
   return useContext(AuthContext);
-}
+};

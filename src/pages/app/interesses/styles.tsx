@@ -1,68 +1,69 @@
 import { StyleSheet } from 'react-native';
-import { lightBlue } from '../../geral/styles';
+
+import { lightBlue } from 'src/pages/geral/styles';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: lightBlue,
+  autorExemplar: {
+    color: '#aaa',
+    fontSize: 12,
+    letterSpacing: 1,
   },
   body: {
     backgroundColor: 'white',
     height: '43%',
     marginBottom: 12,
   },
-  titleContainer: {
+  container: {
+    backgroundColor: lightBlue,
+    flex: 1,
+  },
+  dataNotificao: {
+    color: '#aaa',
+    fontSize: 12,
+    letterSpacing: 1,
+  },
+  divisor: {
+    alignSelf: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#aaa',
-    padding: 10,
-  },
-  titleText: {
-    fontSize: 18,
-    letterSpacing: 1.5,
-  },
-  semInteressesText: {
-    marginTop: 24,
-    marginLeft: 24,
-  },
-  itemContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 8,
-    paddingHorizontal: 12,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    borderColor: '#efefef',
+    height: 1,
+    width: '95%',
   },
   exemplarContainer: {
     display: 'flex',
     flexDirection: 'column',
     width: '90%',
   },
-  titleExemplar: {
-    fontSize: 16,
-    flexWrap: 'wrap',
-    letterSpacing: 0.5,
-  },
-  autorExemplar: {
-    fontSize: 12,
-    color: '#aaa',
-    letterSpacing: 1,
+  itemContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 8,
+    paddingHorizontal: 12,
   },
   removeButtonContainer: {
     padding: 4,
   },
+  semInteressesText: {
+    marginLeft: 24,
+    marginTop: 24,
+  },
+  titleContainer: {
+    borderBottomColor: '#aaa',
+    borderBottomWidth: 1,
+    padding: 10,
+  },
+  titleExemplar: {
+    flexWrap: 'wrap',
+    fontSize: 16,
+    letterSpacing: 0.5,
+  },
   titleNotificao: {
     letterSpacing: 0.5,
   },
-  dataNotificao: {
-    fontSize: 12,
-    color: '#aaa',
-    letterSpacing: 1,
-  },
-  divisor: {
-    width: '95%',
-    alignSelf: 'center',
-    height: 1,
-    borderBottomWidth: 1,
-    borderColor: '#efefef',
+  titleText: {
+    fontSize: 18,
+    letterSpacing: 1.5,
   },
 });
