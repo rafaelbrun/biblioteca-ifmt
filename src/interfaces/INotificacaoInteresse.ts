@@ -1,7 +1,7 @@
-import { IExemplar } from "./IExemplar";
+import { IExemplar } from './IExemplar';
 
 export interface INotificaoExemplar {
-    id: number;
-    exemplar: IExemplar;
-    dataNotificacao: Date;
+  id: number;
+  exemplar: IExemplar;
+  dataNotificacao: Date;
 }

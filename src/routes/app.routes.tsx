@@ -24,19 +24,21 @@ function ProfileStackScreen() {
 const Tab = createBottomTabNavigator();
 
 const AppRoutes: React.FC = () => (
-  <Tab.Navigator screenOptions={({ route }) => ({
-    tabBarIcon: ({ color, size }) => {
-      let iconName: any = 'home';
-      if (route.name == 'Perfil') {
-        iconName = 'profile';
-      }
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ color, size }) => {
+        let iconName: any = 'home';
+        if (route.name == 'Perfil') {
+          iconName = 'profile';
+        }
 
-      return <AntDesign name={iconName} size={24} color={color} />;
-    },
-    headerShown: false,
-    tabBarLabelStyle: { marginBottom: 6, fontSize: 14 },
-    tabBarStyle: { height: 60 },
-  })}>
+        return <AntDesign name={iconName} size={24} color={color} />;
+      },
+      headerShown: false,
+      tabBarLabelStyle: { marginBottom: 6, fontSize: 14 },
+      tabBarStyle: { height: 60 },
+    })}
+  >
     <Tab.Screen name="Inicio" component={Main} />
     <Tab.Screen name="Perfil" component={ProfileStackScreen} />
   </Tab.Navigator>

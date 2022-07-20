@@ -1,5 +1,5 @@
 const images = {
-    logoIf: require('./logo-ifmt.png')
+  logoIf: require('./logo-ifmt.png'),
 };
 
 export default images;

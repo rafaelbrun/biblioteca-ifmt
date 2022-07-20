@@ -1,7 +1,7 @@
-import { IExemplar } from "./IExemplar";
+import { IExemplar } from './IExemplar';
 
 export interface IReserva {
-    id: number;
-    exemplar: IExemplar;
-    validade: Date;
+  id: number;
+  exemplar: IExemplar;
+  validade: Date;
 }

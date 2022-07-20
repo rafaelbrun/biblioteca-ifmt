@@ -11,6 +11,6 @@ const App: React.FC = () => {
       </AuthProvider>
     </NavigationContainer>
   );
-}
+};
 
 export default App;
