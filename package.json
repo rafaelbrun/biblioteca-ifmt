@@ -32,7 +32,6 @@
     "@types/react-native": "~0.63.2",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
-    "jest": "*",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.7.1",
@@ -45,6 +44,7 @@
     "eslint-plugin-react-native": "^4.0.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
+    "jest": "*",
     "typescript": "~4.0.0"
   },
   "private": true
