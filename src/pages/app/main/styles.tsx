@@ -29,6 +29,7 @@ export default StyleSheet.create({
   },
   centeredView: {
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     flex: 1,
     justifyContent: 'center',
     marginTop: 22,
@@ -112,16 +113,8 @@ export default StyleSheet.create({
     elevation: 5,
     height: '60%',
     justifyContent: 'space-between',
-    margin: 20,
     padding: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      height: 2,
-      width: 0,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    width: '75%',
+    width: '90%',
   },
   textContainer: {
     display: 'flex',

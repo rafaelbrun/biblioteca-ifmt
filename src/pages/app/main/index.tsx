@@ -142,7 +142,8 @@ const Main: React.FC = () => {
       setIsLoading(false);
     };
     fetchData();
-  }, [isLoading, exemplares]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
 
   return (
     <View style={styles.container}>

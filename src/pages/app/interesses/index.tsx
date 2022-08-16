@@ -108,7 +108,7 @@ const Interesses: React.FC = () => {
                       {`O livro ${notificao.exemplar.titulo} ficou disponível!`}
                     </Text>
                     <Text style={styles.dataNotificao}>
-                      {notificao.dataNotificacao}
+                      {`${notificao.dataNotificacao}`}
                     </Text>
                   </View>
                 </View>
