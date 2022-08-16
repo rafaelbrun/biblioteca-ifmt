@@ -55,15 +55,6 @@ module.exports = {
             group: ['..*'],
             message: 'Use only absolute imports',
           },
-          {
-            group: [
-              'core/*',
-              '!@audacy-clients/core',
-              '!@audacy-clients/client-services/core',
-              '!@react-navigation/core',
-            ],
-            message: 'Use @audacy-clients/core for core imports',
-          },
         ],
       },
     ],

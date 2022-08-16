@@ -35,7 +35,7 @@ export const signInApp = (
   senha: string,
 ): Promise<IResponseApi> => {
   return Promise.resolve(
-    api.post('discentes/auth', { matricula, senha }, { timeout: 8000 }),
+    api.post('auth/login', { matricula, senha }, { timeout: 8000 }),
   );
 };
 
