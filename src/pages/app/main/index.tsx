@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -38,24 +38,47 @@ const Main: React.FC = () => {
   const [isLoadingSearch, setIsLoadingSearch] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handlePressExemplar = (index: number): void => {
-    setExemplarSelect(exemplares[index]);
-    setModalVisible(!modalVisible);
-  };
+  const handlePressExemplar = useCallback(
+    (index: number): void => {
+      setExemplarSelect(exemplares[index]);
+      setModalVisible(!modalVisible);
+    },
+    [exemplares, modalVisible],
+  );
 
-  const handlePesquisar = (text: string): void => {
-    if (text === '') {
-      setExemplaresFiltered(exemplares);
-      return;
-    }
-    setIsLoadingSearch(true);
-    setTimeout(() => {
-      setExemplaresFiltered(filterExemplares(text));
-      setIsLoadingSearch(false);
-    }, 500);
-  };
+  const filterExemplares = useCallback(
+    (text: string): IExemplar[] => {
+      const textLower = text.toLowerCase();
+      const filteredList = exemplares.filter((exemplar) => {
+        return (
+          exemplar.autor.toLowerCase().includes(textLower) ||
+          exemplar.titulo.toLowerCase().includes(textLower)
+        );
+      });
+      if (filteredList.length === 0) {
+        setInfoMessage('Nenhum exemplar encontrado.');
+      }
+      return filteredList;
+    },
+    [exemplares],
+  );
 
-  const handleReservar = async (): Promise<void> => {
+  const handlePesquisar = useCallback(
+    (text: string): void => {
+      if (text === '') {
+        setExemplaresFiltered(exemplares);
+        return;
+      }
+      setIsLoadingSearch(true);
+      setTimeout(() => {
+        setExemplaresFiltered(filterExemplares(text));
+        setIsLoadingSearch(false);
+      }, 500);
+    },
+    [exemplares, filterExemplares],
+  );
+
+  const handleReservar = useCallback(async (): Promise<void> => {
     const resp = (await realizarReserva(user.id, exemplarSelect.id)).data;
     let message = 'Reserva realizada com sucesso';
 
@@ -76,43 +99,15 @@ const Main: React.FC = () => {
       ],
       { cancelable: false },
     );
-  };
+  }, [exemplarSelect.id, user.id, modalVisible]);
 
-  const filterExemplares = (text: string): IExemplar[] => {
-    const textLower = text.toLowerCase();
-    const filteredList = exemplares.filter((exemplar) => {
-      return (
-        exemplar.autor.toLowerCase().includes(textLower) ||
-        exemplar.titulo.toLowerCase().includes(textLower)
-      );
-    });
-    if (filteredList.length === 0) {
-      setInfoMessage('Nenhum exemplar encontrado.');
-    }
-    return filteredList;
-  };
-
-  const handleClearSearch = (): void => {
+  const handleClearSearch = useCallback((): void => {
     setFilterText('');
     handlePesquisar('');
-  };
+  }, [handlePesquisar]);
 
-  const renderMapExemplares = (): JSX.Element[] => {
+  const renderMapExemplares = useMemo((): JSX.Element[] => {
     return exemplaresFiltered.map((item: IExemplar, key: number) => {
-      if (item.disponivel) {
-        return (
-          <View key={key}>
-            <TouchableOpacity
-              key={key}
-              style={styles.itemContainer}
-              onPress={() => handlePressExemplar(key)}
-            >
-              <Text style={styles.exemplarTitulo}>{item.titulo}</Text>
-              <Text>{item.autor}</Text>
-            </TouchableOpacity>
-          </View>
-        );
-      }
       return (
         <View key={key}>
           <TouchableOpacity
@@ -120,15 +115,20 @@ const Main: React.FC = () => {
             style={styles.itemContainer}
             onPress={() => handlePressExemplar(key)}
           >
-            <Text style={[styles.exemplarTitulo, styles.disabledText]}>
+            <Text
+              style={[
+                styles.exemplarTitulo,
+                !item.disponivel && styles.disabledText,
+              ]}
+            >
               {item.titulo}
             </Text>
-            <Text style={styles.disabledText}>{item.autor}</Text>
+            <Text>{item.autor}</Text>
           </TouchableOpacity>
         </View>
       );
     });
-  };
+  }, [exemplaresFiltered, handlePressExemplar]);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -260,7 +260,7 @@ const Main: React.FC = () => {
             showsVerticalScrollIndicator={false}
             style={styles.listContainer}
           >
-            {renderMapExemplares()}
+            {renderMapExemplares}
           </ScrollView>
         ) : (
           <View style={styles.errorMessageContainer}>
