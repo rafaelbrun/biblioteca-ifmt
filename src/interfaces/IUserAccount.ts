@@ -2,7 +2,7 @@ import { IReserva } from './IReserva';
 
 export interface IUserAccount {
   id: number;
-  interesses?: number[];
+  interesse?: string;
   matricula: string;
   nome: string;
   reservas?: IReserva[];

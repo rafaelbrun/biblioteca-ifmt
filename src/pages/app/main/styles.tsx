@@ -46,6 +46,12 @@ export default StyleSheet.create({
     fontWeight: '600',
     marginLeft: 4,
   },
+  divider: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    height: 1,
+    marginHorizontal: 20,
+    width: '85%',
+  },
   errorMessage: {
     fontSize: 16,
     letterSpacing: 1,
@@ -83,7 +89,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#fff',
     height: '80%',
-    marginHorizontal: 24,
+    width: '85%',
   },
   loaderContainer: {
     marginTop: 24,

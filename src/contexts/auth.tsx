@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IUserAccount } from 'src/interfaces/IUserAccount';
-import { signInApp } from 'src/services/exemplares-service';
+import { signInApp } from 'src/services/auth-services';
 
 interface IAuthContextData {
   loading: boolean;

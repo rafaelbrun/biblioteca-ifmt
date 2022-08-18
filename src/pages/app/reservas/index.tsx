@@ -8,7 +8,7 @@ import AppHeader from 'src/components/AppHeader';
 import AppStatusBar from 'src/components/AppStatusBar';
 import { useAuth } from 'src/contexts/auth';
 import { IReserva } from 'src/interfaces/IReserva';
-import { getAllReservas } from 'src/services/exemplares-service';
+import { getAllReservas } from 'src/services/discente-service';
 
 import styles from './styles';
 

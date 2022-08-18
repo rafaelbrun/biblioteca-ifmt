@@ -15,10 +15,8 @@ import AppStatusBar from 'src/components/AppStatusBar';
 import { useAuth } from 'src/contexts/auth';
 import { IExemplar } from 'src/interfaces/IExemplar';
 import { darkBlue, skyBlue } from 'src/pages/geral/styles';
-import {
-  realizarReserva,
-  getAllExemplares,
-} from 'src/services/exemplares-service';
+import { criarInteresse, realizarReserva } from 'src/services/discente-service';
+import { getAllExemplares } from 'src/services/exemplares-service';
 
 import styles from './styles';
 
@@ -106,6 +104,26 @@ const Main: React.FC = () => {
     handlePesquisar('');
   }, [handlePesquisar]);
 
+  const handleCriarInteresse = useCallback(async () => {
+    setModalVisible(!modalVisible);
+    const resp = await criarInteresse(user.id, exemplarSelect.id);
+    if (resp.data.success) {
+      Alert.alert(
+        'Sucesso',
+        `Você criou interesse no livro ${exemplarSelect.titulo}`,
+        [
+          {
+            onPress: () => {
+              setModalVisible(!modalVisible);
+            },
+            text: 'Ok',
+          },
+        ],
+        { cancelable: false },
+      );
+    }
+  }, [exemplarSelect.id, exemplarSelect.titulo, modalVisible, user.id]);
+
   const renderMapExemplares = useMemo((): JSX.Element[] => {
     return exemplaresFiltered.map((item: IExemplar, key: number) => {
       return (
@@ -123,8 +141,11 @@ const Main: React.FC = () => {
             >
               {item.titulo}
             </Text>
-            <Text>{item.autor}</Text>
+            <Text style={[!item.disponivel && styles.disabledText]}>
+              {item.autor}
+            </Text>
           </TouchableOpacity>
+          <View style={styles.divider} />
         </View>
       );
     });
@@ -199,7 +220,7 @@ const Main: React.FC = () => {
               {!exemplarSelect.disponivel ? (
                 <TouchableOpacity
                   style={[styles.button, styles.buttonDarkBlue]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPress={handleCriarInteresse}
                 >
                   <Text style={styles.textStyle}>{'Criar Interesse'}</Text>
                 </TouchableOpacity>

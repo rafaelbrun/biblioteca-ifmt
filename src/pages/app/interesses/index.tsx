@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
@@ -9,6 +9,8 @@ import AppHeader from 'src/components/AppHeader';
 import AppStatusBar from 'src/components/AppStatusBar';
 import { IExemplar } from 'src/interfaces/IExemplar';
 import { INotificaoExemplar } from 'src/interfaces/INotificacaoInteresse';
+import { getAllInteresses } from 'src/services/discente-service';
+import { getMultiExemplares } from 'src/services/exemplares-service';
 
 import styles from './styles';
 
@@ -18,6 +20,23 @@ const Interesses: React.FC = () => {
   const notificacoes: INotificaoExemplar[] = [];
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const getInteresses = async (): Promise<void> => {
+      const reqInteresses = (await getAllInteresses(1)).data.data.interesse;
+      if (reqInteresses) {
+        const convertedInteresses = reqInteresses
+          .split(',')
+          .map((interesse) => {
+            return Number(interesse);
+          });
+        const multiExemplares = (await getMultiExemplares(convertedInteresses))
+          .data.data;
+        setExemplares(multiExemplares);
+      }
+    };
+    getInteresses();
+  }, []);
 
   const navigateBack = (): void => {
     navigation.goBack();
@@ -96,7 +115,7 @@ const Interesses: React.FC = () => {
       </View>
       <View style={styles.body}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>{'Notificações de Interesse'}</Text>
+          <Text style={styles.titleText}>{'Avisos de Interesse'}</Text>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           {notificacoes.map((notificao, index) => {
