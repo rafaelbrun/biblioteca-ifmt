@@ -18,3 +18,16 @@ export const getMultiExemplares = (
     api.post('exemplares/multi', { ids }, { timeout: 8000 }),
   );
 };
+
+export const removerReserva = (
+  idDiscente: number,
+  idExemplar: number,
+): Promise<AxiosResponse<IResponseBack<null>>> => {
+  return Promise.resolve(
+    api.post(
+      'discentes/reserva/remover',
+      { idDiscente, idExemplar },
+      { timeout: 8000 },
+    ),
+  );
+};

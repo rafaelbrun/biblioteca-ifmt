@@ -20,7 +20,8 @@ export default StyleSheet.create({
   },
   itemContainer: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: 16,
   },
   itemDateText: {
