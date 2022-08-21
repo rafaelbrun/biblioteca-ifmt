@@ -145,7 +145,9 @@ const Main: React.FC = () => {
               {item.autor}
             </Text>
           </TouchableOpacity>
-          <View style={styles.divider} />
+          {key < exemplaresFiltered.length - 1 && (
+            <View style={styles.divider} />
+          )}
         </View>
       );
     });
