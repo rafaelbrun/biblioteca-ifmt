@@ -48,7 +48,7 @@ const Reservas: React.FC = () => {
                       {reserva.exemplar.titulo}
                     </Text>
                     <Text style={styles.itemDateText}>
-                      {`Entrega até ${reserva.validade}`}
+                      {`Devolução até ${reserva.validade}`}
                     </Text>
                   </View>
                   {index + 1 !== reservas.length ? (

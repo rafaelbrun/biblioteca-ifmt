@@ -105,12 +105,25 @@ const Main: React.FC = () => {
   }, [handlePesquisar]);
 
   const handleCriarInteresse = useCallback(async () => {
-    setModalVisible(!modalVisible);
     const resp = await criarInteresse(user.id, exemplarSelect.id);
     if (resp.data.success) {
       Alert.alert(
         'Sucesso',
         `Você criou interesse no livro ${exemplarSelect.titulo}`,
+        [
+          {
+            onPress: () => {
+              setModalVisible(!modalVisible);
+            },
+            text: 'Ok',
+          },
+        ],
+        { cancelable: false },
+      );
+    } else {
+      Alert.alert(
+        'Interesse',
+        `${resp.data.error}`,
         [
           {
             onPress: () => {

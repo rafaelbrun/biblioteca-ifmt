@@ -37,6 +37,19 @@ export function criarInteresse(
   );
 }
 
+export function removerInteresse(
+  idDiscente: number,
+  idExemplar: number,
+): Promise<AxiosResponse<IResponseBack<null>>> {
+  return Promise.resolve(
+    api.post(
+      'discentes/interesse/remover',
+      { idDiscente, idExemplar },
+      { timeout: 8000 },
+    ),
+  );
+}
+
 export function getAllInteresses(
   idDiscente: number,
 ): Promise<AxiosResponse<IResponseBack<IUserAccount>>> {

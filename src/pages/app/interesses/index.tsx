@@ -7,14 +7,19 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import AppHeader from 'src/components/AppHeader';
 import AppStatusBar from 'src/components/AppStatusBar';
+import { useAuth } from 'src/contexts/auth';
 import { IExemplar } from 'src/interfaces/IExemplar';
 import { INotificaoExemplar } from 'src/interfaces/INotificacaoInteresse';
-import { getAllInteresses } from 'src/services/discente-service';
+import {
+  getAllInteresses,
+  removerInteresse,
+} from 'src/services/discente-service';
 import { getMultiExemplares } from 'src/services/exemplares-service';
 
 import styles from './styles';
 
 const Interesses: React.FC = () => {
+  const { user } = useAuth();
   const [exemplares, setExemplares] = useState([] as IExemplar[]);
 
   const notificacoes: INotificaoExemplar[] = [];
@@ -23,7 +28,8 @@ const Interesses: React.FC = () => {
 
   useEffect(() => {
     const getInteresses = async (): Promise<void> => {
-      const reqInteresses = (await getAllInteresses(1)).data.data.interesse;
+      const reqInteresses = (await getAllInteresses(user.id)).data.data
+        .interesse;
       if (reqInteresses) {
         const convertedInteresses = reqInteresses
           .split(',')
@@ -36,13 +42,17 @@ const Interesses: React.FC = () => {
       }
     };
     getInteresses();
-  }, []);
+  }, [user.id]);
 
   const navigateBack = (): void => {
     navigation.goBack();
   };
 
-  const handleRemoveInteresse = (index: number, title: string): void => {
+  const handleRemoveInteresse = (
+    idExemplar: number,
+    index: number,
+    title: string,
+  ): void => {
     Alert.alert(
       'Remover',
       `Deseja retirar o interesse do livro ${title}?`,
@@ -53,7 +63,7 @@ const Interesses: React.FC = () => {
         },
         {
           onPress: () => {
-            removeInteresse(index);
+            removeInteresse(index, idExemplar);
           },
           style: 'cancel',
           text: 'Sim',
@@ -63,7 +73,11 @@ const Interesses: React.FC = () => {
     );
   };
 
-  const removeInteresse = (indexInteresse: number): void => {
+  const removeInteresse = async (
+    indexInteresse: number,
+    idExemplar: number,
+  ): Promise<void> => {
+    await removerInteresse(user.id, idExemplar);
     setExemplares(exemplares.filter((_, index) => index !== indexInteresse));
   };
 
@@ -90,7 +104,11 @@ const Interesses: React.FC = () => {
                     <TouchableOpacity
                       style={styles.removeButtonContainer}
                       onPress={() => {
-                        handleRemoveInteresse(index, exemplar.titulo);
+                        handleRemoveInteresse(
+                          exemplar.id,
+                          index,
+                          exemplar.titulo,
+                        );
                       }}
                     >
                       <Feather color={'red'} name={'x'} size={24} />
