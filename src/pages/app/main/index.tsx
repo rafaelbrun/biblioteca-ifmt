@@ -14,7 +14,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import AppStatusBar from 'src/components/AppStatusBar';
 import { useAuth } from 'src/contexts/auth';
 import { IExemplar } from 'src/interfaces/IExemplar';
-import { darkBlue, skyBlue } from 'src/pages/geral/styles';
+import { darkBlue } from 'src/pages/geral/styles';
 import { criarInteresse, realizarReserva } from 'src/services/discente-service';
 import { getAllExemplares } from 'src/services/exemplares-service';
 
@@ -268,7 +268,7 @@ const Main: React.FC = () => {
             }}
             onSubmitEditing={() => handlePesquisar(filterText)}
           />
-          {filterText !== '' ? (
+          {filterText !== '' && (
             <Feather
               color={'red'}
               name={'x'}
@@ -276,18 +276,7 @@ const Main: React.FC = () => {
               style={styles.marginInput}
               onPress={handleClearSearch}
             />
-          ) : (
-            <View />
           )}
-          <AntDesign
-            color={skyBlue}
-            name={'arrowright'}
-            size={24}
-            style={styles.marginInput}
-            onPress={() => {
-              handlePesquisar(filterText);
-            }}
-          />
         </View>
       </View>
       {!isLoadingSearch && !isLoading ? (

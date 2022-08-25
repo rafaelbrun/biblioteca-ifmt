@@ -107,6 +107,7 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     fontSize: 16,
     letterSpacing: 1,
+    marginLeft: 4,
   },
   modalTextTitle: {
     color: gray,
@@ -123,6 +124,7 @@ export default StyleSheet.create({
     width: '90%',
   },
   textContainer: {
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
     marginBottom: 18,
