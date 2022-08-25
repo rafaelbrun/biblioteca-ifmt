@@ -70,17 +70,6 @@ const Profile: React.FC = () => {
             </View>
           </TouchableOpacity>
           <View style={styles.divisor} />
-          <TouchableOpacity
-            onPress={() => {
-              navigateTo('Configuracoes');
-            }}
-          >
-            <View style={styles.itemContainer}>
-              <Ionicons color={'black'} name={'settings-outline'} size={20} />
-              <Text style={styles.itemText}>{'Configurações'}</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.divisor} />
           <TouchableOpacity onPress={handleDeslogar}>
             <View style={styles.itemContainer}>
               <Ionicons color={'red'} name={'ios-exit-outline'} size={20} />

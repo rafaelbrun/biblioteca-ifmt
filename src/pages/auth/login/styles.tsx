@@ -7,6 +7,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     padding: 4,
+    height: '100%',
   },
   card: {
     alignItems: 'center',

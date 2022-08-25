@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Configuracoes from 'src/pages/app/configuracoes';
 import Interesses from 'src/pages/app/interesses';
 import Main from 'src/pages/app/main';
 import Profile from 'src/pages/app/profile';
@@ -19,7 +18,6 @@ const ProfileStackScreen: React.ComponentType = () => {
       <ProfileStack.Screen component={Profile} name={'Home'} />
       <ProfileStack.Screen component={Interesses} name={'Interesses'} />
       <ProfileStack.Screen component={Reservas} name={'Reservas'} />
-      <ProfileStack.Screen component={Configuracoes} name={'Configuracoes'} />
     </ProfileStack.Navigator>
   );
 };
