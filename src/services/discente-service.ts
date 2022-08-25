@@ -55,3 +55,11 @@ export function getAllInteresses(
 ): Promise<AxiosResponse<IResponseBack<IUserAccount>>> {
   return Promise.resolve(api.get(`discentes/${idDiscente}`, { timeout: 8000 }));
 }
+
+export function limparAlertas(
+  idDiscente: number,
+): Promise<AxiosResponse<IResponseBack<null>>> {
+  return Promise.resolve(
+    api.delete(`discentes/alertas/limpar/${idDiscente}`, { timeout: 8000 }),
+  );
+}

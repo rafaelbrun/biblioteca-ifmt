@@ -42,6 +42,11 @@ export default StyleSheet.create({
     padding: 8,
     paddingHorizontal: 12,
   },
+  limparText: {
+    borderBottomColor: 'red',
+    borderBottomWidth: 1,
+    color: 'red',
+  },
   removeButtonContainer: {
     padding: 4,
   },
@@ -50,8 +55,11 @@ export default StyleSheet.create({
     marginTop: 24,
   },
   titleContainer: {
+    alignItems: 'center',
     borderBottomColor: '#aaa',
     borderBottomWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: 10,
   },
   titleExemplar: {
