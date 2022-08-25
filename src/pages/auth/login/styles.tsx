@@ -81,6 +81,5 @@ export default StyleSheet.create({
     fontSize: 22,
     fontWeight: '600',
     letterSpacing: 1,
-    marginLeft: 24,
   },
 });

@@ -51,8 +51,10 @@ const Login: React.FC = () => {
           <View style={styles.card}>
             <View style={styles.flexRow}>
               <Image source={images.logoIf} style={styles.logoImg} />
-              <Text style={styles.textTitle}>{`BIBLIOTECA
-	  IFMT`}</Text>
+              <View style={{ alignItems: 'center' }}>
+                <Text style={styles.textTitle}>{'BIBLIOTECA'}</Text>
+                <Text style={styles.textTitle}>{'IFMT'}</Text>
+              </View>
             </View>
             <View style={styles.inputContainer}>
               <View style={styles.fieldInput}>
